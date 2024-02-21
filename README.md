@@ -6,6 +6,9 @@ Résolution des exercices GlobalExam automatique et simple d'utilisation. Automa
   <img src="https://content.globalexam.cloud/vi/media/logos/natural/global-exam-natural.png"> 
 </div>
 
+<div align="center">
+    <img alt="Visitor Stats" src="https://widgetbite.com/stats/Nv3l/GlobalExamSolver"/>  
+</div>
 
 ## Installation
 ```bash

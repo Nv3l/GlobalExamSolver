@@ -7,7 +7,7 @@ Résolution des exercices GlobalExam automatique et simple d'utilisation. Automa
 </div>
 
 <div align="center">
-    <img alt="Visitor Stats" src="https://widgetbite.com/stats/Nv3l/GlobalExamSolver"/>  
+    <img alt="Visitor Stats" src="https://widgetbite.com/stats/Nv3l"/>  
 </div>
 
 ## Installation

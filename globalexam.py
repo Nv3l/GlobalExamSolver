@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import messagebox
 from time import sleep
 from webdriver_manager.firefox import GeckoDriverManager
 from selenium import webdriver

@@ -31,7 +31,7 @@ Il vous suffit de renseigner votre identifiant et mot de passe GlobalExam, de ch
 
 L'interface se divise en 2 parties :
 
-- La partie de gauche permet résoudre tout les exercices d'une catégorie (exam ou général)
+- La partie de gauche permet de résoudre tous les exercices d'une catégorie. (exam ou général)
 
 
 <div id="left_pannel" align="center">
@@ -39,7 +39,7 @@ L'interface se divise en 2 parties :
 </div>
 
 
-- La partie de droite permet résoudre un exercice spécifique (exam ou général)
+- La partie de droite permet de résoudre un exercice spécifique. (exam ou général)
 
 <div id="right_pannel" align="center">
   <img src="img/right pannel.png"> 
@@ -51,7 +51,7 @@ L'interface se divise en 2 parties :
 
 - Résolution automatique des exercices GlobalExam
 - Résolution des exercices de grammaire exam et général
-- Résolution de tout les exercices en continue
+- Résolution de tous les exercices en continu
 - Résolution d'un exercice spécifique
 - Choix du temps de réponse
 - Utilisation adaptative pour toute connexion internet
@@ -60,10 +60,10 @@ L'interface se divise en 2 parties :
 
 ## Résolutions de problème
 
-Si vous avez résolus plusieurs exercices à la fin de la page, il est possible que le programme ne puisse pas résoudre les exercices suivants.
-Il en vas de même si vous avez plusieurs exercices qui affiches en définitif un résultat négatif.
+Si vous avez résolu plusieurs exercices à la fin de la page, il est possible que le programme ne puisse pas résoudre les exercices suivants.
+Il en va de même si vous avez plusieurs exercices qui affichent en définitif un résultat négatif.
 
- Pour résoudre ce problème, il suffit de renseigner le nombre d'exercices que vous avez fait dans la la partie "Skip step".
+Pour résoudre ce problème, il suffit de renseigner le nombre d'exercices que vous avez fait dans la partie "Skip step".
 
 
 <br>
@@ -74,7 +74,7 @@ Il en vas de même si vous avez plusieurs exercices qui affiches en définitif u
 
 <br>
 
-Si la fenêtre "freeze" au lancement, celà est normal. Le programme télécharge le driver de Firefox pour la première fois. Il suffit d'attendre quelques secondes pour que la fenêtre se lance.
+Si la fenêtre "freeze" au lancement, cela est normal. Le programme télécharge le driver de Firefox pour la première fois. Il suffit d'attendre quelques secondes pour que la fenêtre se lance.
 
 ## Support
 

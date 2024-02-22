@@ -6,6 +6,11 @@ Résolution des exercices GlobalExam automatique et simple d'utilisation. Automa
   <img src="https://content.globalexam.cloud/vi/media/logos/natural/global-exam-natural.png"> 
 </div>
 
+## Explication de l'outil
+Cet outil a pour vocation de résoudre la plupart des exercices de global exam.
+Il est complémentaire au script de [MartinPELCAT](https://github.com/MartinPELCAT/GlobalExamFinisher). Il permet de justifier le nombre d'heures ajouté en plus en stipulant que vous avez effectué tous les exercices jusqu'à avoir 100%.
+Ainsi, si un professeur vera que vous êtes assidu dans votre travail !
+
 ## Installation
 ```bash
 pip install -r requirements.txt

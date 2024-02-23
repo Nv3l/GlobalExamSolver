@@ -1,6 +1,8 @@
 import tkinter as tk
 from time import sleep
 from webdriver_manager.firefox import GeckoDriverManager
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -236,14 +238,14 @@ def invert_number(a):
 # Create the main window
 window = tk.Tk()
 window.title("GlobalExam Solver")
-window.geometry("950x800")
+window.geometry("1200x620")
 
 # ==== Add a solve for exercice tab ====
 
 # Add title
 title_label = tk.Label(window, text="Solve every exercice possible on GlobalExam !", font=("Arial", "12", "bold"))
 title_label.pack()
-title_label.place(x=100, y=20)
+title_label.place(x=350, y=20)
 
 # Add prompt for the user and the password
 username_label = tk.Label(window, text="Username:")
@@ -260,24 +262,31 @@ password_label.place(x=100, y=110)
 password_entry.place(x=100, y=140)
 
 
-# Add spacing
-spacing_label = tk.Label(window, text="")
-spacing_label.pack()
-spacing_label.place(x=100, y=170)
+# Add choice for web breowser
+browser_label = tk.Label(window, text="Web Browser (default Firefox) :")
+browser_label.pack()
+browser_list = tk.Listbox(window, height=1)
+
+# Add element for the list
+browser_list.insert(0, "Firefox")
+# browser_list.insert(1, "Chrome")
+
+# Select default web browser
+browser_list.selection_set(0,0)
+
+browser_list.pack()
+browser_label.place(x=100, y=200)
+browser_list.place(x=100, y=230)
+
 
 # Add prompt for a delay with default value
-delay_label = tk.Label(window, text="Add a general delay (default 2) \n For slow connection use 4 :")
+delay_label = tk.Label(window, text="Add a general delay (default 3) \n For slow connection use 5 :")
 delay_label.pack()
 delay_entry = tk.Entry(window)
-delay_entry.insert(0, "2")  # Set default value
+delay_entry.insert(0, "3")  # Set default value
 delay_entry.pack()
-delay_label.place(x=100, y=200)
-delay_entry.place(x=100, y=230)
-
-# Add spacing
-spacing_label = tk.Label(window, text="")
-spacing_label.pack()
-spacing_label.place(x=100, y=260)
+delay_label.place(x=350, y=50)
+delay_entry.place(x=350, y=80)
 
 # Create the subdomain label and entry
 subdomain_label = tk.Label(window, text="Solve exercice for the selected subdomain (exam, general):")
@@ -285,13 +294,8 @@ subdomain_label.pack()
 subdomain_entry = tk.Entry(window)
 subdomain_entry.insert(0, "exam")  # Set default value
 subdomain_entry.pack()
-subdomain_label.place(x=100, y=290)
-subdomain_entry.place(x=100, y=320)
-
-# Add spacing
-spacing_label = tk.Label(window, text="")
-spacing_label.pack()
-spacing_label.place(x=100, y=350)
+subdomain_label.place(x=350, y=140)
+subdomain_entry.place(x=350, y=170)
 
 # Create a input for the step of the exercice
 stepExercice_label = tk.Label(window, text="If you already solve some exercice at the bottom of the page \n You must add a step to skip this exercice (default 0) :")
@@ -299,13 +303,8 @@ stepExercice_label.pack()
 stepExercice_entry = tk.Entry(window)
 stepExercice_entry.insert(0, "0")  # Set default value
 stepExercice_entry.pack()
-stepExercice_label.place(x=100, y=380)
-stepExercice_entry.place(x=100, y=410)
-
-# Add spacing
-spacing_label = tk.Label(window, text="")
-spacing_label.pack()
-spacing_label.place(x=100, y=440)
+stepExercice_label.place(x=350, y=230)
+stepExercice_entry.place(x=350, y=260)
 
 # Add delay to resolve the exercice
 delayExercice_label = tk.Label(window, text="Add a delay in seconde to resolve exercice (default 0) :")
@@ -313,19 +312,8 @@ delayExercice_label.pack()
 delayExercice_entry = tk.Entry(window)
 delayExercice_entry.insert(0, "0")  # Set default value
 delayExercice_entry.pack()
-delayExercice_label.place(x=100, y=470)
-delayExercice_entry.place(x=100, y=500)
-
-
-# Add spacing
-spacing_label = tk.Label(window, text="")
-spacing_label.pack()
-spacing_label.place(x=100, y=530)
-
-# Add spacing
-spacing_label = tk.Label(window, text="")
-spacing_label.pack()
-spacing_label.place(x=100, y=560)
+delayExercice_label.place(x=350, y=320)
+delayExercice_entry.place(x=350, y=350)
 
 def on_solve_next_exercice():
     subdomain = subdomain_entry.get()
@@ -334,9 +322,23 @@ def on_solve_next_exercice():
     delay = int(delay_entry.get())
     stepExercice = invert_number(int(stepExercice_entry.get()))
     delayExercice = int(delayExercice_entry.get())
-    
-    # Downlaod and start the driver
-    driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+
+    # See wich browser the user choose
+    browser = browser_list.curselection()
+
+    # Firefox browser
+    if 0 in browser :
+        # Download Firefox driver
+        driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+
+    # Chrome browser
+    else:
+        # Download Chrome driver
+        chromeOptions = webdriver.ChromeOptions()
+        chromeOptions.add_argument(argument='log-level=3')
+
+        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager(latest_release_url="https://chromedriver.storage.googleapis.com/765286099.0.4844.51/").install()), options=chromeOptions)
+
 
     # Print a message to the user to not close the window
     print("/!\ Do not close this window ! /!\\ \n\n")
@@ -352,7 +354,7 @@ def on_solve_next_exercice():
 # Create the solve next exercice button
 solve_next_exercice_button = tk.Button(window, text="Solve exercice", command=on_solve_next_exercice)
 solve_next_exercice_button.pack()
-solve_next_exercice_button.place(x=100, y=590)
+solve_next_exercice_button.place(x=350, y=410)
 
 
 ## ==== Add a selected re-solve exercice button ====
@@ -360,40 +362,16 @@ solve_next_exercice_button.place(x=100, y=590)
 # Add title
 title_label = tk.Label(window, text="Solve a selected exercice \n (you must count the line of the exercice)", font=("Arial", "12", "bold"))
 title_label.pack()
-title_label.place(x=550, y=10)
-
-# Add prompt for the user and the password
-selected_username_label = tk.Label(window, text="Username:")
-selected_username_label.pack()
-selected_username_entry = tk.Entry(window)
-selected_username_entry.pack()
-selected_password_label = tk.Label(window, text="Password:")
-selected_password_label.pack()
-selected_password_entry = tk.Entry(window)
-selected_password_entry.pack()
-selected_username_label.place(x=550, y=50)
-selected_username_entry.place(x=550, y=80)
-selected_password_label.place(x=550, y=110)
-selected_password_entry.place(x=550, y=140)
-
-# Add spacing
-spacing_label = tk.Label(window, text="")
-spacing_label.pack()
-spacing_label.place(x=550, y=170)
+title_label.place(x=750, y=10)
 
 # Add prompt for a delay with default value
-selected_delay_label = tk.Label(window, text="Add a general delay (default 2) \n For slow connection use 4 :")
+selected_delay_label = tk.Label(window, text="Add a general delay (default 3) \n For slow connection use 5 :")
 selected_delay_label.pack()
 selected_delay_entry = tk.Entry(window)
-selected_delay_entry.insert(0, "2")  # Set default value
+selected_delay_entry.insert(0, "3")  # Set default value
 selected_delay_entry.pack()
-selected_delay_label.place(x=550, y=200)
-selected_delay_entry.place(x=550, y=230)
-
-# Add spacing
-spacing_label = tk.Label(window, text="")
-spacing_label.pack()
-spacing_label.place(x=550, y=260)
+selected_delay_label.place(x=750, y=50)
+selected_delay_entry.place(x=750, y=80)
 
 # Create the subdomain label and entry
 selected_subdomain_label = tk.Label(window, text="Solve exercice for the selected subdomain (exam, general):")
@@ -401,13 +379,8 @@ selected_subdomain_label.pack()
 selected_subdomain_entry = tk.Entry(window)
 selected_subdomain_entry.insert(0, "exam")  # Set default value
 selected_subdomain_entry.pack()
-selected_subdomain_label.place(x=550, y=290)
-selected_subdomain_entry.place(x=550, y=320)
-
-# Add spacing
-spacing_label = tk.Label(window, text="")
-spacing_label.pack()
-spacing_label.place(x=550, y=350)
+selected_subdomain_label.place(x=750, y=140)
+selected_subdomain_entry.place(x=750, y=170)
 
 # Create a input for the number of the exercice
 selected_number_exercice_label = tk.Label(window, text="Enter the selected number of the exercice to solve :")
@@ -415,13 +388,8 @@ selected_number_exercice_label.pack()
 selected_exercice_number_entry = tk.Entry(window)
 selected_exercice_number_entry.insert(0, "0")  # Set default value
 selected_exercice_number_entry.pack()
-selected_number_exercice_label.place(x=550, y=380)
-selected_exercice_number_entry.place(x=550, y=410)
-
-# Add spacing
-spacing_label = tk.Label(window, text="")
-spacing_label.pack()
-spacing_label.place(x=550, y=440)
+selected_number_exercice_label.place(x=750, y=230)
+selected_exercice_number_entry.place(x=750, y=260)
 
 # Add delay to resolve the exercice
 selected_delayExercice_label = tk.Label(window, text="Add a delay in seconde to resolve selected exercice (default 0) :")
@@ -429,31 +397,34 @@ selected_delayExercice_label.pack()
 selected_delayExercice_entry = tk.Entry(window)
 selected_delayExercice_entry.insert(0, "0")  # Set default value
 selected_delayExercice_entry.pack()
-selected_delayExercice_label.place(x=550, y=470)
-selected_delayExercice_entry.place(x=550, y=500)
-
-
-# Add spacing
-spacing_label = tk.Label(window, text="")
-spacing_label.pack()
-spacing_label.place(x=550, y=530)
-
-# Add spacing
-spacing_label = tk.Label(window, text="")
-spacing_label.pack()
-spacing_label.place(x=550, y=560)
+selected_delayExercice_label.place(x=750, y=320)
+selected_delayExercice_entry.place(x=750, y=350)
 
 
 def on_selected_re_solve_exercice():
     subdomain = selected_subdomain_entry.get()
-    username = selected_username_entry.get()
-    password = selected_password_entry.get()
+    username = username_entry.get()
+    password = password_entry.get()
     delay = int(selected_delay_entry.get())
     exerciceNumber = int(selected_exercice_number_entry.get())
     delayExercice = int(selected_delayExercice_entry.get())
 
-    # Downlaod and start the driver
-    driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+    # See wich browser the user choose
+    browser = browser_list.curselection()
+
+    # Firefox browser
+    if 0 in browser :
+        # Download Firefox driver
+        driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+
+    # Chrome browser
+    else:
+        # Download Chrome driver
+        chromeOptions = webdriver.ChromeOptions()
+        chromeOptions.add_argument(argument='log-level=3')
+
+        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager(latest_release_url="https://chromedriver.storage.googleapis.com/765286099.0.4844.51/").install()), options=chromeOptions)
+
 
     # Print a message to the user to not close the window
     print("/!\ Do not close this window ! /!\\ \n\n")
@@ -470,28 +441,24 @@ def on_selected_re_solve_exercice():
 # Create the solve next exercice button
 solve_next_exercice_button = tk.Button(window, text="Solve selected exercice", command=on_selected_re_solve_exercice)
 solve_next_exercice_button.pack()
-solve_next_exercice_button.place(x=550, y=590)
+solve_next_exercice_button.place(x=750, y=410)
 
-# Add spacing
-spacing_label = tk.Label(window, text="")
-spacing_label.pack()
-spacing_label.place(x=100, y=620)
 
 # add a quit button
 quit_button = tk.Button(window, text="Exit", command=window.quit)
 quit_button.pack()
-quit_button.place(x=450, y=700)
+quit_button.place(x=600, y=500)
 
 # Place credit for the developer
 credit_label = tk.Label(window, text="Developed by Nv3l", font=("Arial", "8", "bold"), fg="grey")
 credit_label.pack()
-credit_label.place(x=400, y=740)
+credit_label.place(x=550, y=540)
 contact_label = tk.Label(window, text="Discord : Chicoch#7678", font=("Arial", "8", "bold"), fg="grey")
 contact_label.pack()
-contact_label.place(x=400, y=760)
+contact_label.place(x=550, y=560)
 github_label = tk.Label(window, text="https://github.com/Nv3l", font=("Arial", "8", "bold"), fg="grey")
 github_label.pack()
-github_label.place(x=400, y=780)
+github_label.place(x=550, y=580)
 
 
 # Print a message to the user to not close the window
@@ -499,3 +466,6 @@ print("/!\ Do not close this window ! /!\\ \n\n")
 
 # Start the main loop
 window.mainloop()
+
+
+

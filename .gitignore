@@ -1,2 +1,4 @@
 geckodriver.log
-test.py
+*test*.*
+*test*
+tempCodeRunnerFile.py

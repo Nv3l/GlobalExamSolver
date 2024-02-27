@@ -254,7 +254,7 @@ username_entry = tk.Entry(window)
 username_entry.pack()
 password_label = tk.Label(window, text="Password:")
 password_label.pack()
-password_entry = tk.Entry(window)
+password_entry = tk.Entry(window, show="*")
 password_entry.pack()
 username_label.place(x=100, y=50)
 username_entry.place(x=100, y=80)
@@ -326,30 +326,49 @@ def on_solve_next_exercice():
     # See wich browser the user choose
     browser = browser_list.curselection()
 
-    # Firefox browser
-    if 0 in browser :
-        # Download Firefox driver
-        driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+    if browser == ():
+        # Show a alert box to the user to select a browser
+        # Show this alert with red border
+        Errorwindow = tk.Tk()
+        Errorwindow.geometry("250x100")
+        Errorwindow.title("Error - GlobalExam Solver")
+        Errorwindow.configure(bg="red")
+
+
+        Errorwindows = tk.Label(Errorwindow, text="Please select a browser", font=("Arial", "12", "bold"), fg="white", bg="red")
+        Errorwindows.pack()
+        Errorwindows.place(x=20, y=40)
+
+        ready = False
 
     # Chrome browser
-    else:
+    elif browser == "(1,)":
         # Download Chrome driver
         chromeOptions = webdriver.ChromeOptions()
         chromeOptions.add_argument(argument='log-level=3')
 
         driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager(latest_release_url="https://chromedriver.storage.googleapis.com/765286099.0.4844.51/").install()), options=chromeOptions)
 
+        ready = True
+
+    # Firefox browser
+    else:
+        # Download Firefox driver
+        driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+
+        ready = True
 
     # Print a message to the user to not close the window
     print("/!\ Do not close this window ! /!\\ \n\n")
 
-    # Initiliaze the driver and login to the global exam website
-    init_globalexam(driver, delay)
-    login_globalexam(driver, delay, username, password)
+    if ready == True:
+        # Initiliaze the driver and login to the global exam website
+        init_globalexam(driver, delay)
+        login_globalexam(driver, delay, username, password)
 
-    # Loop to solve every exercice
-    while True:
-        solve_next_exercice(driver, delay, subdomain, stepExercice, delayExercice)
+        # Loop to solve every exercice
+        while True:
+            solve_next_exercice(driver, delay, subdomain, stepExercice, delayExercice)
 
 # Create the solve next exercice button
 solve_next_exercice_button = tk.Button(window, text="Solve exercice", command=on_solve_next_exercice)
@@ -412,31 +431,51 @@ def on_selected_re_solve_exercice():
     # See wich browser the user choose
     browser = browser_list.curselection()
 
-    # Firefox browser
-    if 0 in browser :
-        # Download Firefox driver
-        driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+    if browser == ():
+        # Show a alert box to the user to select a browser
+        # Show this alert with red border
+        Errorwindow = tk.Tk()
+        Errorwindow.geometry("250x100")
+        Errorwindow.title("Error - GlobalExam Solver")
+        Errorwindow.configure(bg="red")
+
+
+        Errorwindows = tk.Label(Errorwindow, text="Please select a browser", font=("Arial", "12", "bold"), fg="white", bg="red")
+        Errorwindows.pack()
+        Errorwindows.place(x=20, y=40)
+
+        ready = False
 
     # Chrome browser
-    else:
+    elif browser == tuple((1,)):
         # Download Chrome driver
         chromeOptions = webdriver.ChromeOptions()
         chromeOptions.add_argument(argument='log-level=3')
+        # from webdriver_manager.core.utils import ChromeType
 
-        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager(latest_release_url="https://chromedriver.storage.googleapis.com/765286099.0.4844.51/").install()), options=chromeOptions)
+        # driver = webdriver.Chrome(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM, version="114.0.5735.90").install(), options=chromeOptions)
 
+        ready = True
+
+    # Firefox browser
+    else:
+        # Download Firefox driver
+        driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+
+        ready = True
 
     # Print a message to the user to not close the window
     print("/!\ Do not close this window ! /!\\ \n\n")
 
-    # Initiliaze the driver and login to the global exam website
-    init_globalexam(driver, delay)
-    login_globalexam(driver, delay, username, password)
+    if ready == True:
+        # Initiliaze the driver and login to the global exam website
+        init_globalexam(driver, delay)
+        login_globalexam(driver, delay, username, password)
 
-    # Solve the selected exercice
-    selected_re_solve_exercice(driver, delay, exerciceNumber, subdomain, delayExercice)
+        # Solve the selected exercice
+        selected_re_solve_exercice(driver, delay, exerciceNumber, subdomain, delayExercice)
 
-    driver.quit()
+        driver.quit()
 
 # Create the solve next exercice button
 solve_next_exercice_button = tk.Button(window, text="Solve selected exercice", command=on_selected_re_solve_exercice)

@@ -8,7 +8,10 @@ Résolution des exercices GlobalExam automatique et simple d'utilisation. Automa
 
 ## Explication de l'outil
 Cet outil a pour vocation de résoudre la plupart des exercices de global exam.
-Il est complémentaire au script de [MartinPELCAT](https://github.com/MartinPELCAT/GlobalExamFinisher). Il permet de justifier le nombre d'heures ajouté en plus en stipulant que vous avez effectué tous les exercices jusqu'à avoir 100%.
+Il est complémentaire au script de [MartinPELCAT](https://github.com/MartinPELCAT/GlobalExamFinisher).
+
+Il permet de justifier le nombre d'heures ajouté en plus en stipulant que vous avez effectué tous les exercices jusqu'à avoir 100%.
+
 Ainsi, si un professeur vera que vous êtes assidu dans votre travail !
 
 ## Installation
@@ -82,7 +85,5 @@ Pour résoudre ce problème, il suffit de renseigner le nombre d'exercices que v
 Si la fenêtre "freeze" au lancement, cela est normal. Le programme télécharge le driver de Firefox pour la première fois. Il suffit d'attendre quelques secondes pour que la fenêtre se lance.
 
 ## Support
-
-Pour toute question, vous pouvez me contacter sur Discord : `Chicoch#7678`
 
 Pour tout report de bug, vous pouvez ouvrir une issue sur le repository.

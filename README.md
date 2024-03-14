@@ -14,6 +14,9 @@ Il permet de justifier le nombre d'heures ajouté en plus en stipulant que vous 
 
 Ainsi, si un professeur vera que vous êtes assidu dans votre travail !
 
+<br>
+<br>
+
 ## Installation
 ```bash
 pip install -r requirements.txt

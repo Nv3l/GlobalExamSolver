@@ -98,7 +98,7 @@ def solve_next_exercice(driver, delay, subdomain, delayExercice):
     # The stepExercice is for skipping multiple "Relancer" button that may appear if the user
     # had already done some exercice in between "Me tester" button
     buttonsExercices = driver.find_elements(By.XPATH, "//button[contains(.,'Relancer')]")
-    clickOnLastButton = buttonsExercices[-1+stepExercice].click()
+    clickOnLastButton = buttonsExercices[-1+invert_number(stepExercice)].click()
     
     sleep(delay)
 

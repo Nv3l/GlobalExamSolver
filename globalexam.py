@@ -30,13 +30,22 @@ def login_globalexam(driver, delay, username, password):
 
 # Function to loop for solving exercie
 # it can be in the exam or general subdomain
-def solve_next_exercice(driver, delay, subdomain, stepExercice, delayExercice):
+def solve_next_exercice(driver, delay, subdomain, delayExercice):
 
     # Go to exercices page
     driver.get("https://"+subdomain+".global-exam.com/library/study-sheets/categories/grammar")
     
     sleep(delay)
-    
+
+    # Find all the exercice button
+    allButtonsExercice = driver.find_elements(By.XPATH, "//button[contains(@class,'button-solid-default-small')]")
+
+    # Get the content of all the buttons
+    allButtonsExerciceContent = [button.text for button in allButtonsExercice]
+
+    # Count the number of "Relancer" between two or more "Me tester"
+    stepExercice = sum(1 for i, item in enumerate(allButtonsExerciceContent) if (item == "Relancer" and allButtonsExerciceContent[i - 1] == "Me tester" if i > 0 else False))
+
     # Find all the button that has "Me tester" inside and click on the first one
     buttonsExercices = driver.find_elements(By.XPATH, "//button[contains(.,'Me tester')]")
     clickOnFirstButton = buttonsExercices[0].click()
@@ -297,14 +306,14 @@ subdomain_entry.pack()
 subdomain_label.place(x=350, y=140)
 subdomain_entry.place(x=350, y=170)
 
-# Create a input for the step of the exercice
-stepExercice_label = tk.Label(window, text="If you already solve some exercice at the bottom of the page \n You must add a step to skip this exercice (default 0) :")
-stepExercice_label.pack()
-stepExercice_entry = tk.Entry(window)
-stepExercice_entry.insert(0, "0")  # Set default value
-stepExercice_entry.pack()
-stepExercice_label.place(x=350, y=230)
-stepExercice_entry.place(x=350, y=260)
+# # Create a input for the step of the exercice
+# stepExercice_label = tk.Label(window, text="If you already solve some exercice at the bottom of the page \n You must add a step to skip this exercice (default 0) :")
+# stepExercice_label.pack()
+# stepExercice_entry = tk.Entry(window)
+# stepExercice_entry.insert(0, "0")  # Set default value
+# stepExercice_entry.pack()
+# stepExercice_label.place(x=350, y=230)
+# stepExercice_entry.place(x=350, y=260)
 
 # Add delay to resolve the exercice
 delayExercice_label = tk.Label(window, text="Add a delay in seconde to resolve exercice (default 0) :")
@@ -320,7 +329,7 @@ def on_solve_next_exercice():
     username = username_entry.get()
     password = password_entry.get()
     delay = int(delay_entry.get())
-    stepExercice = invert_number(int(stepExercice_entry.get()))
+    # stepExercice = invert_number(int(stepExercice_entry.get()))
     delayExercice = int(delayExercice_entry.get())
 
     # See wich browser the user choose
@@ -368,7 +377,7 @@ def on_solve_next_exercice():
 
         # Loop to solve every exercice
         while True:
-            solve_next_exercice(driver, delay, subdomain, stepExercice, delayExercice)
+            solve_next_exercice(driver, delay, subdomain, delayExercice)
 
 # Create the solve next exercice button
 solve_next_exercice_button = tk.Button(window, text="Solve exercice", command=on_solve_next_exercice)

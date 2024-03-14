@@ -21,13 +21,20 @@ pip install -r requirements.txt
 git clone https://github.com/Nv3l/GlobalExamSolver.git
 ```
 ## Pré-requis
-> Tester sur Python 3.8.5 et Windows 10 x64
+> Avoir Firefox d'installé sur votre machine
 
-> Utilisable uniquement sur Firefox
-
-> Script adapté pour les OS Windows et Linux avec interface graphique
+> Script utilisable pour les OS Windows et Linux avec interface graphique
 <br>
 
+## Fonctionnalités
+
+- Résolution automatique des exercices GlobalExam
+- Résolution des exercices de grammaire exam et général
+- Résolution de tous les exercices en continu
+- Résolution d'un exercice spécifique
+- Choix du temps de réponse
+- Utilisation adaptative pour toute connexion internet
+<br>
 ## Utilisation
 
 Lancer le fichier [globalexam.exe](globalexam.exe)
@@ -55,35 +62,18 @@ L'interface se divise en 2 parties :
 
 <br>
 
-## Fonctionnalités
-
-- Résolution automatique des exercices GlobalExam
-- Résolution des exercices de grammaire exam et général
-- Résolution de tous les exercices en continu
-- Résolution d'un exercice spécifique
-- Choix du temps de réponse
-- Utilisation adaptative pour toute connexion internet
-
-<br>
 
 ## Résolutions de problème
 
-Si vous avez résolu plusieurs exercices à la fin de la page, il est possible que le programme ne puisse pas résoudre les exercices suivants.
-Il en va de même si vous avez plusieurs exercices qui affichent en définitif un résultat négatif.
-
-Pour résoudre ce problème, il suffit de renseigner le nombre d'exercices que vous avez fait dans la partie "Skip step".
-
-
-<br>
-
-<div id="skip_step" align="center">
-  <img src="img/Skip Step.png"> 
-</div>
-
-<br>
+> Cet outil est testé sur Python 3.8.5 et Windows 10 x64
 
 Si la fenêtre "freeze" au lancement, cela est normal. Le programme télécharge le driver de Firefox pour la première fois. Il suffit d'attendre quelques secondes pour que la fenêtre se lance.
 
 ## Support
 
 Pour tout report de bug, vous pouvez ouvrir une issue sur le repository.
+
+
+## Disclaimer
+
+This script is for educational purposes only.

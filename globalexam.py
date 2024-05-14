@@ -44,7 +44,23 @@ def solve_next_exercice(driver, delay, subdomain, delayExercice):
     allButtonsExerciceContent = [button.text for button in allButtonsExercice]
 
     # Count the number of "Relancer" between two or more "Me tester"
-    stepExercice = sum(1 for i, item in enumerate(allButtonsExerciceContent) if (item == "Relancer" and allButtonsExerciceContent[i - 1] == "Me tester" if i > 0 else False))
+    # stepExercice = sum(1 for i, item in enumerate(allButtonsExerciceContent) if (item == "Relancer" and allButtonsExerciceContent[i - 1] == "Me tester" if i > 0 else False))
+
+    first_me_tester_index = None
+    last_me_tester_index = None
+
+    for i, item in enumerate(allButtonsExerciceContent):
+        if item == "Me tester":
+            if first_me_tester_index is None:
+                first_me_tester_index = i
+            last_me_tester_index = i
+
+    # Count "Relancer" between the first and last "Me tester"
+    stepExercice = 0
+    if first_me_tester_index is not None and last_me_tester_index is not None:
+        for i in range(first_me_tester_index, last_me_tester_index + 1):
+            if allButtonsExerciceContent[i] == "Relancer":
+                stepExercice += 1
 
     # Find all the button that has "Me tester" inside and click on the first one
     buttonsExercices = driver.find_elements(By.XPATH, "//button[contains(.,'Me tester')]")

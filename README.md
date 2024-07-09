@@ -15,13 +15,14 @@ Il permet de justifier le nombre d'heures ajouté en plus en stipulant que vous 
 Ainsi, si un professeur vera que vous êtes assidu dans votre travail !
 
 <br>
-<br>
 
 ## Installation
 ```bash
+git clone https://github.com/Nv3l/GlobalExamSolver.git
+
 pip install -r requirements.txt
 
-git clone https://github.com/Nv3l/GlobalExamSolver.git
+python3 globalexam.py
 ```
 ## Pré-requis
 > Avoir Firefox d'installé sur votre machine
@@ -29,18 +30,11 @@ git clone https://github.com/Nv3l/GlobalExamSolver.git
 > Script utilisable pour les OS Windows et Linux avec interface graphique
 <br>
 
-## Fonctionnalités
-
-- Résolution automatique des exercices GlobalExam
-- Résolution des exercices de grammaire exam et général
-- Résolution de tous les exercices en continu
-- Résolution d'un exercice spécifique
-- Choix du temps de réponse
-- Utilisation adaptative pour toute connexion internet
-<br>
 ## Utilisation
 
 Lancer le fichier [globalexam.exe](globalexam.exe)
+<br>
+<br>
 <br>
 
 ## Configuration
@@ -63,6 +57,16 @@ L'interface se divise en 2 parties :
   <img src="img/right pannel.png"> 
 </div>
 
+<br>
+
+## Fonctionnalités
+
+- Résolution automatique des exercices GlobalExam
+- Résolution des exercices de grammaire exam et général
+- Résolution de tous les exercices en continu
+- Résolution d'un exercice spécifique
+- Choix du temps de réponse
+- Utilisation adaptative pour toute connexion internet
 <br>
 
 
